@@ -3,10 +3,8 @@
     <top-action :layout="['slot', 'refresh']" @onRefresh='getTableData'>
       <a-button type='primary' size='small' @click='btnAddCouOon'>新增</a-button>
     </top-action>
-
     <a-table :dataSource='tableData' :columns='columns' row-key='id'
              :pagination='pageModel' @change='handleTableChange'>
-
       <template #bodyCell='{ column, record }'>
         <template v-if="column.key === 'name'">
           <div class='couponCard'>
@@ -35,9 +33,7 @@
     <Form :data='formRules' @submit='submitForm' btn-title='确定' ref='addform'></Form>
   </a-drawer>
 </template>
-
 <script setup>
-
 import TopAction from '@/components/common/TopAction'
 import API from '@/api/coupon'
 import { reactive, ref } from 'vue'
@@ -47,7 +43,6 @@ import { formRules } from './formRules'
 import { ElMessageBox, ElNotification } from 'element-plus'
 
 const drawerAddCoupon = ref(false)
-
 const tableData = ref([])
 const pageModel = reactive({
   pageNum: 1,

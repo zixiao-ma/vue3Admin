@@ -18,7 +18,7 @@ const elLoading = {
       this.loadingInstance = ElLoading.service({
         lock: true,
         text: 'Loading',
-        background: 'rgba(0, 0, 0, 0.7)'
+        background: '#fff'
       })
     }
   },

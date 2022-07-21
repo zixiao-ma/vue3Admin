@@ -13,7 +13,6 @@ instance.interceptors.request.use(
   function(config) {
     // TODO 添加token
     // loading 可选 全屏loading和加载进度条
-    // loading.elLoading.start()
     const token = store.getters.token
     if (token) config.headers.token = token
     loading.nprogress.start()
@@ -29,7 +28,6 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   function(response) {
     // 对响应数据做点什么
-    // loading.elLoading.done()
     loading.nprogress.done()
     store.commit('viewLoading/closeLoading')
     const { status, data: { data, msg } } = response

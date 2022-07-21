@@ -1,12 +1,5 @@
 <template>
   <div>
-    <!--    subTitle: "总支付订单"
-        subUnit: ""
-        subValue: 51
-        title: "支付订单"
-        unit: "年"
-        unitColor: "success"
-        value: 51-->
     <el-row :gutter='20'>
       <el-col :span='6' v-for='item in listOne' :key='item.value'>
         <el-card class='box-card' shadow='hover'>
@@ -20,6 +13,7 @@
             <span>{{ item.subValue }}</span>
           </div>
         </el-card>
+
       </el-col>
 
     </el-row>
