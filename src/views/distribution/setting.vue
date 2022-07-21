@@ -1,5 +1,5 @@
 <template>
-  <div>分销设置</div>
+  <a-card>分销设置</a-card>
 </template>
 
 <script setup>

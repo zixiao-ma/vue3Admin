@@ -1,5 +1,7 @@
 <template>
-  <div>分销</div>
+  <a-card>
+    分销
+  </a-card>
 </template>
 
 <script setup>

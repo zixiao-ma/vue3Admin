@@ -1,5 +1,5 @@
 <template>
-  <div>物流设置</div>
+  <a-card>物流设置</a-card>
 </template>
 
 <script setup>

@@ -1,24 +1,35 @@
 <template>
   <el-table :data='props.data' border row-key='id' style='width: 100%'>
-    <el-table-column
-      v-for='(item,index) in props.rules'
-      v-show='item.sort===index'
-      :key='item.id'
-      :align='item.align'
-      :label='item.label'
-      :prop='item.prop'
-      :type='item.type'
-      :width="item.width + 'px'"
-    >
-      <template v-if='item.slot' v-slot='{ row, $index, column }'>
-        <slot
-          :column='column'
-          :index='$index'
-          :name='item.slot'
-          :row='row'
-        ></slot>
-      </template>
-    </el-table-column>
+    <template v-for='(item,index) in props.rules' :key='index+(Math.random())'>
+      <el-table-column
+        :key='index+(Math.random())'
+        v-if="item.type==='function'"
+        :label='item.label'
+        :width='item.width'
+      >
+        <template v-slot='{row}'>
+          <div v-html='item.callback&&item.callback(row)'></div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        v-else
+        v-show='item.sort===index'
+        :align='item.align'
+        :label='item.label'
+        :prop='item.prop'
+        :type='item.type'
+        :width="item.width + 'px'"
+      >
+        <template v-if='item.slot' v-slot='{ row, $index, column }'>
+          <slot
+            :column='column'
+            :index='$index'
+            :name='item.slot'
+            :row='row'
+          ></slot>
+        </template>
+      </el-table-column>
+    </template>
   </el-table>
 </template>
 

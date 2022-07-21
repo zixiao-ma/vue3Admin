@@ -1,5 +1,7 @@
 <template>
-  <div>评论管理</div>
+  <a-card>
+    评论管理
+  </a-card>
 </template>
 
 <script setup>

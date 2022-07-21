@@ -1,5 +1,7 @@
 <template>
-  <div>权限</div>
+  <a-card>
+    权限
+  </a-card>
 </template>
 
 <script setup>

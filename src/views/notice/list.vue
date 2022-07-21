@@ -1,5 +1,5 @@
 <template>
-  <div>公告</div>
+  <a-card>公告</a-card>
 </template>
 
 <script setup>

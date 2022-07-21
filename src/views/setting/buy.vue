@@ -1,5 +1,5 @@
 <template>
-  <div>交易设置</div>
+  <a-card>交易设置</a-card>
 </template>
 
 <script setup>

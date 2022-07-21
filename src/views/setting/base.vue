@@ -1,5 +1,5 @@
 <template>
-  <div>基础设置</div>
+  <a-card>基础设置</a-card>
 </template>
 
 <script setup>

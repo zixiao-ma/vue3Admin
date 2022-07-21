@@ -1,5 +1,5 @@
 <template>
-  <div>role</div>
+  <a-card>role</a-card>
 </template>
 
 <script setup>

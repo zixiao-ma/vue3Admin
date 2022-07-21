@@ -48,7 +48,7 @@
         <el-color-picker v-if="item.type==='color'" v-model='ruleForm[key]' />
         <!--        日期-->
         <el-date-picker
-          v-if="item.type==='data'"
+          v-if="item.type==='date'"
           v-model='ruleForm[key]'
           :placeholder="'请选择'+item.label"
           type='date'

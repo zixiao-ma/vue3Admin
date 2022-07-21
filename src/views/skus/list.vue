@@ -37,6 +37,7 @@
   </a-card>
   <a-drawer
     v-model:visible='diawerAddSku'
+    width='500px'
     class='custom-class'
     :title="isedit?'修改规格':'添加规格'"
     placement='right'

@@ -53,7 +53,12 @@ instance.interceptors.response.use(
     const messageError = error.response.data.msg
     switch (status) {
       case 400:
-        ElNotification.error(messageError)
+        ElNotification({
+          type: 'error',
+          title: '提示',
+          dangerouslyUseHTMLString: true,
+          message: messageError
+        })
         break
       case 401:
         ElNotification.error('Token超时,请重新登录！')

@@ -45,6 +45,7 @@ const state = reactive({
 const pagination = reactive({
   total: 36
 })
+const TableData = ref([])
 /**
  * 表格多选框方法
  * @param selectedRowKeys
@@ -53,7 +54,7 @@ const onSelectChange = selectedRowKeys => {
   console.log('selectedRowKeys changed: ', selectedRowKeys)
   state.selectedRowKeys = selectedRowKeys
 }
-const TableData = ref([])
+
 const getTableData = async (page = 1) => {
   TableData.value = []
   const obj = {

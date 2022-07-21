@@ -1,5 +1,5 @@
 <template>
-  <div>order</div>
+  <a-card>order</a-card>
 </template>
 
 <script setup>
