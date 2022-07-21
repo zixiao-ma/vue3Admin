@@ -65,21 +65,14 @@
   <el-dialog v-model='dialogVisibleImage'>
     <img w-full :src='dialogImageUrl' alt='Preview Image' style='width: 100%;height: 100%' />
   </el-dialog>
-  <el-dialog
-    v-model='dialogChooseACover'
+  <a-modal
+    v-model:visible='dialogChooseACover'
     title='选择图片'
-    width='60%'
+    width='1300px'
+    @ok='handleOk'
   >
-    <span>This is a message</span>
-    <template #footer>
-      <span class='dialog-footer'>
-        <el-button @click='dialogChooseACover = false'>取消</el-button>
-        <el-button type='primary' @click='dialogChooseACover = false'
-        >确定</el-button
-        >
-      </span>
-    </template>
-  </el-dialog>
+    <dialog-image></dialog-image>
+  </a-modal>
 </template>
 
 <script setup>
@@ -90,11 +83,12 @@ import { ElMessageBox, ElNotification } from 'element-plus'
 import Form from '@/components/common/Form'
 import { formColumns } from '@/views/manager/formColumns'
 import ROLEAPI from '@/api/role'
+import { useStore } from 'vuex'
+import DialogImage from '@/components/common/dialogImage'
 
-const fileList = ref([{
-  name: 'food.jpeg',
-  url: 'http://tangzhe123-com.oss-cn-shenzhen.aliyuncs.com/public/62af04afe39fa.jpg'
-}])
+const store = useStore()
+
+const fileList = ref([])
 const getRoleList = async () => {
   const res = await ROLEAPI.getRoleList(1)
   formColumns.role_id.options = res.list
@@ -141,6 +135,11 @@ const getTableData = async (page = 1, keyword = '') => {
   for (let i = 0; i < TableData.value.length; i++) {
     statusModel[`status${TableData.value[i].id}`] = TableData.value[i].status === 1
   }
+}
+const handleOk = () => {
+  fileList.value = store.getters.urlList
+  dialogChooseACover.value = false
+  store.commit('image/removeUrl')
 }
 const showChooseACover = () => {
   dialogChooseACover.value = true

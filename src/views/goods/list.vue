@@ -80,21 +80,14 @@
 
     </Form>
   </a-drawer>
-  <el-dialog
-    v-model='dialogChooseACover'
+  <a-modal
+    v-model:visible='dialogChooseACover'
     title='选择图片'
-    width='60%'
+    width='1300px'
+    @ok='handleOk'
   >
-    <span>This is a message</span>
-    <template #footer>
-      <span class='dialog-footer'>
-        <el-button @click='dialogChooseACover = false'>取消</el-button>
-        <el-button type='primary' @click='dialogChooseACover = false'
-        >确定</el-button
-        >
-      </span>
-    </template>
-  </el-dialog>
+    <dialog-image></dialog-image>
+  </a-modal>
   <a-drawer
     v-model:visible='GoodsSkuDrawer'
     class='custom-class'
@@ -168,6 +161,8 @@ import { columns } from '@/views/goods/columns'
 import Form from '@/components/common/Form'
 import { addFormData, skuFormData } from './addFormData'
 import { ElMessageBox, ElNotification } from 'element-plus'
+import DialogImage from '@/components/common/dialogImage'
+import { useStore } from 'vuex'
 
 /**
  * 定义响应式变量
@@ -186,17 +181,21 @@ const setUpACarousel = ref(false)
 const editGoodsId = ref()
 const GoodsSkuDrawer = ref(false)
 const skuDisplayType = ref('0')
+const store = useStore()
 const state = reactive({
   selectedRowKeys: []
 })
+
 const pagination = reactive({
   total: 36
 })
 const dialogChooseACover = ref(false)
-const fileList = ref([{
-  name: 'food.jpeg',
-  url: 'http://tangzhe123-com.oss-cn-shenzhen.aliyuncs.com/public/62d3c585ad19a.jpg'
-}])
+const fileList = ref([])
+const handleOk = () => {
+  fileList.value = store.getters.urlList
+  dialogChooseACover.value = false
+  store.commit('image/removeUrl')
+}
 const fileListBanner = ref([])
 const dialogImageUrl = ref('')
 const dialogVisibleImage = ref(false)
@@ -262,6 +261,7 @@ const handleTableChange = (pag) => {
  * 开启商品添加模态框
  */
 const btnOpenAddGoodsDrawer = () => {
+  fileList.value = []
   isEdit.value = false
   addGoodsDrawer.value = true
 }
