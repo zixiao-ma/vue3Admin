@@ -6,40 +6,33 @@ import request from '@/utils/request'
 
 const getRoleList = (page) => {
   return request({
-    url: '/admin/role/' + page,
+    url: '/admin/notice/' + page,
     method: 'get'
   })
 }
-const updateRoleStatus = (id, data) => {
-  return request({
-    url: `/admin/role/${id}/update_status`,
-    method: 'post',
-    data
-  })
-}
+
 const delRole = id => {
   return request({
-    url: `/admin/role/${id}/delete`,
+    url: `/admin/notice/${id}/delete`,
     method: 'post'
   })
 }
 const addRole = (data) => {
   return request({
-    url: '/admin/role',
+    url: '/admin/notice',
     method: 'post',
     data
   })
 }
 const editRole = (id, data) => {
   return request({
-    url: '/admin/role/' + id,
+    url: '/admin/notice/' + id,
     method: 'post',
     data
   })
 }
 export default {
   getRoleList,
-  updateRoleStatus,
   delRole,
   addRole,
   editRole
