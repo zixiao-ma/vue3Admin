@@ -13,5 +13,6 @@ export default {
   collapse: state => state.common.collapse,
   tags: state => state.tag.tagsArray,
   loading: state => state.viewLoading.loading,
-  urlList: state => state.image.urlList
+  urlList: state => state.image.urlList,
+  bgc: state => state.subject.bgc
 }

@@ -71,7 +71,7 @@
     width='1300px'
     @ok='handleOk'
   >
-    <dialog-image></dialog-image>
+    <dialog-image showCkb></dialog-image>
   </a-modal>
 </template>
 

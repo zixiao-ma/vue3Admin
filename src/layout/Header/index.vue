@@ -30,6 +30,16 @@
     </div>
   </div>
   <div class='right d-flex justify-content-center align-items-center'>
+    <div class='hover subject' @click='subjectModel=true'>
+      <el-tooltip content='主题色' placement='bottom'>
+
+        <el-icon>
+          <svg-icon icon='subject'></svg-icon>
+        </el-icon>
+
+      </el-tooltip>
+
+    </div>
     <div class='FullScreen hover' @click='toggleScreen'>
       <el-tooltip :content="isScreenFull?'退出全屏':'全屏'" placement='bottom'>
 
@@ -68,7 +78,15 @@
     </a-drawer>
 
   </div>
-
+  <a-modal cancelText='恢复默认' ok-text='确定' @cancel='ModelCancel'
+           v-model:visible='subjectModel' title='选择主题色' @ok='subjectModel=false'
+           :keyboard='false'
+           :maskClosable='false'>
+    <div class='subColorBox'>
+      <span class='subColor' ref='spanColor' v-for='item in 60' :key='item' @click='changeBGC(item)'
+            :style='{background:getcolor()}'></span>
+    </div>
+  </a-modal>
 </template>
 
 <script setup>
@@ -80,6 +98,7 @@ import screenfull from 'screenfull'
 import { ElMessageBox } from 'element-plus'
 import { useStore } from 'vuex'
 
+const subjectModel = ref(false)
 const store = useStore()
 const isScreenFull = ref(false)
 const drawer = ref(false)
@@ -87,12 +106,32 @@ const showMydrawer = () => {
   drawer.value = true
   console.log(drawer)
 }
+
+function getcolor() {
+  let str = '#'
+  for (let i = 0; i < 6; i++) {
+    const a = parseInt(Math.random() * 16)
+
+    const str1 = a.toString(16)
+    str += str1
+  }
+  return str
+}
+
+const spanColor = ref(null)
+const changeBGC = (i) => {
+  const bgc = spanColor.value[i - 1].style.background
+  store.commit('subject/setBgc', bgc)
+}
 const toggleScreen = () => {
   isScreenFull.value = !isScreenFull.value
   screenfull.toggle()
 }
 const changePassword = data => {
   console.log(data)
+}
+const ModelCancel = () => {
+  store.commit('subject/resetBackground')
 }
 const refresh = () => {
   window.location.reload()
@@ -140,7 +179,7 @@ const logout = () => {
 
   .hover {
     &:hover {
-      background-color: rgba(99, 102, 241);
+      background-color: rgba(0, 0, 0, .2);
     }
   }
 
@@ -157,6 +196,12 @@ const logout = () => {
     }
   }
 
+  .subject {
+    font-size: 18px;
+    padding: 0 5px;
+    position: relative;
+  }
+
   & > div {
     height: 100%;
     display: flex;
@@ -167,9 +212,23 @@ const logout = () => {
 
   .hover {
     &:hover {
-      background-color: rgba(99, 102, 241);
+      background-color: rgba(0, 0, 0, .2);
     }
   }
 }
 
+.subColorBox {
+  .subColor {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 10px;
+    margin: 5px;
+    transition: all .3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
 </style>

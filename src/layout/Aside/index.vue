@@ -6,6 +6,7 @@
       :collapse='$store.getters.collapse'
       :collapse-transition='true'
       router
+      :active-text-color='$store.getters.bgc'
     >
       <menu-item v-for='item in MenuList' :key='item.id' :tree='item'></menu-item>
     </el-menu>

@@ -11,7 +11,7 @@
       </div>
       <div class='titleItem' ref='titleItem'
            @click='$router.push(item.path)'
-           :class="$route.path===item.path?'active':''"
+           :style="{color:$route.path===item.path?$store.getters.bgc:''}"
            v-for='(item,index) in list'
            :key='item'>
         <span
@@ -171,7 +171,4 @@ const handleCommand = (name) => {
   overflow: hidden;
 }
 
-.active {
-  color: rgb(64, 158, 255);
-}
 </style>

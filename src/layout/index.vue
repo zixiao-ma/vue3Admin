@@ -1,6 +1,6 @@
 <template>
   <el-container class='w-100 h-100'>
-    <el-header class='d-flex justify-content-between align-items-center'>
+    <el-header class='d-flex justify-content-between align-items-center' :style='{backgroundColor:$store.getters.bgc}'>
       <app-header></app-header>
     </el-header>
     <el-container class='mainmain'>
@@ -20,10 +20,10 @@ import AppMain from './Main'
 import AppHeader from './Header'</script>
 <style scoped lang='scss'>
 .el-header {
-  background-color: rgb(67, 56, 202);
   position: fixed;
   top: 0;
   width: 100%;
+  transition: all .3s;
 }
 
 .mainmain {
