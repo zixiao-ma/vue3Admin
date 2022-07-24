@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row :gutter='20'>
+    <el-row :gutter='20' v-permission="'getStatistics1,GET'">
       <el-col :span='6' v-for='item in listOne' :key='item.value'>
         <el-card class='box-card' shadow='hover'>
           <div class='card_header'>
@@ -30,7 +30,7 @@
 
     </el-row>
     <el-row :gutter='20' style='margin-top: 10px'>
-      <el-col :span='12'>
+      <el-col :span='12' v-permission="'getStatistics3,GET'">
         <el-card shadow='hover'>
           <div class='card_header'>
             <span>订单统计</span>
@@ -45,16 +45,18 @@
           <div id='chartMain' style='width: 600px;height:277px;'></div>
         </el-card>
       </el-col>
-      <el-col :span='12'>
+      <el-col :span='12' v-permission="'getStatistics2,GET'">
         <el-card class='btmCard' style='margin-bottom: 10px' shadow='hover' v-for='(val,key) in listTwo' :key='key'>
           <div class='card_header'>
             <span>{{ key === 'goods' ? '店铺及商品提示' : '交易提示' }}</span>
             <el-tag effect='plain' type='danger'>{{ key === 'goods' ? '店铺及商品提示' : '交易提示' }}</el-tag>
           </div>
-          <span v-for='item in val' :key='item' class='spanbox'>
+          <div class='card-body'>
+            <span v-for='item in val' :key='item' class='spanbox'>
             <h2>{{ item.value }}</h2>
             <div>{{ item.label }}</div>
           </span>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -109,6 +111,9 @@ const changeChartType = type => {
 
 </script>
 <style scoped lang='scss'>
+.card-body {
+  padding: 11px 0 !important;
+}
 
 .card_header {
   height: 41px;
@@ -156,13 +161,18 @@ p {
 }
 
 .btmCard {
+  .card-body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
   .spanbox {
     display: inline-block;
     width: 118px;
-    height: 92px;
+    height: 90px;
     background-color: rgba(229, 231, 235, .3);
     border-radius: 5px;
-    margin: 10px;
     text-align: center;
     padding-top: 20px;
     color: rgb(107, 114, 128);

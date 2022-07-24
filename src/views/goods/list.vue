@@ -11,10 +11,11 @@
   <!--头部和表格-->
   <el-card>
     <top-action :sel-options='selOptions' @onSearch='getTableData' @onRefresh='getTableData'>
-      <a-button type='primary' size='small' @click='btnOpenAddGoodsDrawer'>新增</a-button>
-      <a-button type='danger' size='small' @click='btnDelAll'>批量删除</a-button>
-      <a-button size='small' @click='changeGoodsStatus({status:1})'>上架</a-button>
-      <a-button size='small' @click='changeGoodsStatus({status:0})'>下架</a-button>
+      <a-button type='primary' size='small' @click='btnOpenAddGoodsDrawer' v-permission="'createGoods,POST'">新增
+      </a-button>
+      <a-button type='danger' size='small' @click='btnDelAll' v-permission="'deleteGoods,POST'">批量删除</a-button>
+      <a-button size='small' @click='changeGoodsStatus({status:1})' v-permission="'restoreGoods,POST'">上架</a-button>
+      <a-button size='small' @click='changeGoodsStatus({status:0})' v-permission="'destroyGoods,POST'">下架</a-button>
     </top-action>
     <a-table
       :row-selection='{ selectedRowKeys:state.selectedRowKeys, onChange: onSelectChange }'
@@ -47,11 +48,19 @@
           <el-tag type='danger' v-else>未通过</el-tag>
         </template>
         <template v-if="column.key==='operating'">
-          <a-button type='link' size='small' @click='btnEditGoods(record)'>修改</a-button>
-          <a-button type='link' size='small' @click='btnEditGoodsSku(record)'>商品规格</a-button>
-          <a-button type='link' size='small' @click='btnSetUpACarousel(record)'>设置轮播图</a-button>
-          <a-button type='link' size='small' @click='btnShowGoodsDetail(record)'>商品详情</a-button>
-          <a-button type='link' size='small' @click='btnDeleteGoods(record)'>删除</a-button>
+          <a-button type='link' size='small' @click='btnEditGoods(record)' v-permission="'updateGoods,POST'">修改
+          </a-button>
+          <a-button type='link' size='small' @click='btnEditGoodsSku(record)' v-permission="'updateGoodsSkus,POST'">
+            商品规格
+          </a-button>
+          <a-button type='link' size='small' @click='btnSetUpACarousel(record)' v-permission="'setGoodsBanner,POST'">
+            设置轮播图
+          </a-button>
+          <a-button type='link' size='small' @click='btnShowGoodsDetail(record)' v-permission="'checkGoods,POST'">
+            商品详情
+          </a-button>
+          <a-button type='link' size='small' @click='btnDeleteGoods(record)' v-permission="'deleteGoods,POST'">删除
+          </a-button>
         </template>
       </template>
     </a-table>

@@ -1,7 +1,7 @@
 <template>
   <a-card>
     <top-action :layout="['slot', 'refresh','search','searchBtn']" @onSearch='search' @onRefresh='getTableData(1)'>
-      <a-button type='primary' size='small' @click='btnAddLevel'>新增</a-button>
+      <a-button type='primary' size='small' @click='btnAddLevel' v-permission="'createManager,POST'">新增</a-button>
     </top-action>
     <a-table
       style='margin-top: 10px;'
@@ -27,11 +27,12 @@
           <a-tag>{{ record.role.name }}</a-tag>
         </template>
         <template v-if="column.key==='operating'">
-          <a-button type='link' @click='btnEditLevel(record.id)'>修改</a-button>
-          <a-button type='link' @click='btnDelLevel(record.id)'>删除</a-button>
+          <a-button type='link' @click='btnEditLevel(record.id)' v-permission="'updateManager,POST'">修改</a-button>
+          <a-button type='link' @click='btnDelLevel(record.id)' v-permission="'deleteManager,POST'">删除</a-button>
         </template>
         <template v-if="column.key==='status'">
           <el-switch
+            v-permission="'updateManagerStatus,POST'"
             v-model='statusModel[`status${record.id}`]'
             class='ml-2'
             @change='changeStatus(statusModel[`status${record.id}`],record.id)'

@@ -2,6 +2,7 @@
   <a-card style='margin-top: 10px'>
     <top-action :layout="['slot', 'refresh']" @onRefresh='getSelectData'>
       <a-button type='primary' size='small' @click='btnAddCateGory'
+                v-permission="'createCategory,POST'"
       >新增
       </a-button
       >
@@ -12,15 +13,16 @@
         <span>{{ item.name }}</span>
       </el-col>
       <el-col :span='8'>
-        <a-button type='link' @click='btnProductsFeatured(item)'>推荐商品</a-button>
+        <a-button type='link' @click='btnProductsFeatured(item)' v-permission="'sortCategory,POST'">推荐商品</a-button>
         <el-switch
+          v-permission="'updateCategoryStatus,POST'"
           v-model='statusModel[`status${i}`]'
           class='ml-2'
           @change='changeStatus(statusModel[`status${i}`],item.id)'
           style='--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949'
         />
-        <a-button type='link' @click='btnedit(item.id)'>修改</a-button>
-        <a-button type='link' @click='del(item)'>删除</a-button>
+        <a-button type='link' @click='btnedit(item.id)' v-permission="'updateCategory,POST'">修改</a-button>
+        <a-button type='link' @click='del(item)' v-permission="'deleteCategory,POST'">删除</a-button>
       </el-col>
     </el-row>
   </a-card>

@@ -3,10 +3,11 @@
     <top-action :layout="['slot', 'refresh']" @onRefresh='getSkuList()'>
       <a-button type='primary' size='small'
                 @click='btnOpenDiawerAddSku'
+                v-permission="'createSkus,POST'"
       >新增
       </a-button
       >
-      <a-button type='danger' size='small' @click='plDel'>批量删除</a-button>
+      <a-button type='danger' size='small' @click='plDel' v-permission="'deleteSkus,POST'">批量删除</a-button>
     </top-action>
     <a-table
       style='margin-top: 10px'
@@ -22,6 +23,7 @@
       <template #bodyCell='{ column ,record}'>
         <template v-if="column.key==='status'">
           <el-switch
+            v-permission="'updateSkusStatus,POST'"
             v-model='statusModel[`status${record.id}`]'
             class='ml-2'
             @change='changeStatus(statusModel[`status${record.id}`],record.id)'
@@ -29,8 +31,8 @@
           />
         </template>
         <template v-if="column.key==='operating'">
-          <a-button type='link' @click='editSku(record)'>修改</a-button>
-          <a-button type='link' @click='del(record.id)'>删除</a-button>
+          <a-button type='link' @click='editSku(record)' v-permission="'updateSkus,POST'">修改</a-button>
+          <a-button type='link' @click='del(record.id)' v-permission="'deleteSkus,POST'">删除</a-button>
         </template>
       </template>
     </a-table>

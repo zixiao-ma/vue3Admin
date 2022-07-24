@@ -37,10 +37,28 @@ const editRole = (id, data) => {
     data
   })
 }
+const getRuleTree = () => {
+  return request({
+    url: '/admin/rule/1',
+    method: 'get'
+  })
+}
+const setRuleTree = (id, ids) => {
+  return request({
+    url: '/admin/role/set_rules',
+    method: 'post',
+    data: {
+      id,
+      rule_ids: ids
+    }
+  })
+}
 export default {
   getRoleList,
   updateRoleStatus,
   delRole,
   addRole,
-  editRole
+  editRole,
+  getRuleTree,
+  setRuleTree
 }

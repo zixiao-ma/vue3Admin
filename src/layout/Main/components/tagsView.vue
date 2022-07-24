@@ -6,7 +6,8 @@
       </el-icon>
     </el-button>
     <div class='title' ref='title'>
-      <div class='titleItem' ref='titleItemIndex' :class="$route.path==='/'?'active':''" @click="$router.push('/')">
+      <div class='titleItem' ref='titleItemIndex' :style="{color:$route.path==='/'?$store.getters.bgc:''}"
+           @click="$router.push('/')">
         <span style='right: 0'>后台首页</span>
       </div>
       <div class='titleItem' ref='titleItem'

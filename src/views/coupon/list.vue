@@ -1,7 +1,7 @@
 <template>
   <a-card>
     <top-action :layout="['slot', 'refresh']" @onRefresh='getTableData'>
-      <a-button type='primary' size='small' @click='btnAddCouOon'>新增</a-button>
+      <a-button type='primary' size='small' @click='btnAddCouOon' v-permission="'createCoupon,POST'">新增</a-button>
     </top-action>
     <a-table :dataSource='tableData' :columns='columns' row-key='id'
              :pagination='pageModel' @change='handleTableChange'>
@@ -13,7 +13,9 @@
           </div>
         </template>
         <template v-if="column.key==='operating'">
-          <a-button type='link' v-if='record.status!==0' @click='btnEdit(record)'>修改</a-button>
+          <a-button type='link' v-if='record.status!==0' @click='btnEdit(record)' v-permission="'updateCoupon,POST'">
+            修改
+          </a-button>
           <a-button type='link' @click='btnDeleteCoupon(record)'>删除</a-button>
         </template>
         <template v-if="column.key==='status'">

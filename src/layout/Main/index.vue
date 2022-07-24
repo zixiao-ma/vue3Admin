@@ -3,12 +3,6 @@
     <tags-view></tags-view>
   </div>
   <main>
-    <!--    <loading v-model:active='$store.getters.loading'
-                 :can-cancel='true'
-                 :is-full-page='true'>
-          <img src='./loading.gif' alt='' style='width: 200px;height: 200px;'>
-        </loading>-->
-
     <a-spin :spinning='$store.getters.loading'>
       <router-view></router-view>
     </a-spin>

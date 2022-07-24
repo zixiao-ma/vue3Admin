@@ -1,8 +1,11 @@
 <template>
   <a-card>
     <div class='top'>
-      <a-button type='primary' size='small' @click='addImgClassModel=true'>新增图片分类</a-button>
-      <a-button type='danger' size='small' @click='uploadImgModel = true'>上传图片</a-button>
+      <a-button type='primary' size='small' @click='addImgClassModel=true' v-permission="'createImageClass,POST'">
+        新增图片分类
+      </a-button>
+      <a-button type='danger' size='small' @click='uploadImgModel = true' v-permission="'uploadImage,POST'">上传图片
+      </a-button>
     </div>
     <el-row :gutter='20' style='margin-top: 10px'>
       <el-col :span='4'>
@@ -12,8 +15,8 @@
             <template #label>
         <span class='custom-tabs-label'>
           <span>{{ item.name }}</span>
-          <span style='margin-left: 50px' @click.stop='editClassName(item.id)'><el-icon><Edit /></el-icon></span>
-          <span style='margin-left: 10px' @click.stop='delTabs(item.id)'><el-icon><Close /></el-icon></span>
+          <span style='margin-left: 50px' @click.stop='editClassName(item.id)' v-permission="'updateImageClass,POST'"><el-icon><Edit /></el-icon></span>
+          <span style='margin-left: 10px' @click.stop='delTabs(item.id)' v-permission="'deleteImageClass,POST'"><el-icon><Close /></el-icon></span>
         </span>
             </template>
           </el-tab-pane>
@@ -39,8 +42,8 @@
             <div class='imgfot d-flex justify-content-center'>
               <a-checkbox v-if='props.showCkb' style='margin-top: 5px' v-model:checked='checkboxStatus[`ckb${index}`]'
                           @change='addImgUrl(item)'></a-checkbox>
-              <a-button type='link' @click='btnEditName(item)'>重命名</a-button>
-              <a-button type='link' @click='delImage(item.id)'>删除</a-button>
+              <a-button type='link' @click='btnEditName(item)' v-permission="'updateImage,POST'">重命名</a-button>
+              <a-button type='link' @click='delImage(item.id)' v-permission="'deleteImage,POST'">删除</a-button>
             </div>
           </div>
         </div>

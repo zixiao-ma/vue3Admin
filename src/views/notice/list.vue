@@ -1,7 +1,7 @@
 <template>
   <a-card>
     <top-action :layout="['slot', 'refresh']" @onRefresh='getTableData'>
-      <a-button type='primary' size='small' @click='btnAddLevel'>新增</a-button>
+      <a-button type='primary' size='small' @click='btnAddLevel' v-permission="'createNotice,POST'">新增</a-button>
     </top-action>
     <a-table
       style='margin-top: 10px;'
@@ -15,8 +15,8 @@
     >
       <template #bodyCell='{ column,record }'>
         <template v-if="column.key==='operating'">
-          <a-button type='link' @click='btnEditLevel(record.id)'>修改</a-button>
-          <a-button type='link' @click='btnDelLevel(record.id)'>删除</a-button>
+          <a-button type='link' @click='btnEditLevel(record.id)' v-permission="'updateNotice,POST'">修改</a-button>
+          <a-button type='link' @click='btnDelLevel(record.id)' v-permission="'deleteNotice,POST'">删除</a-button>
         </template>
       </template>
     </a-table>
